@@ -2,7 +2,7 @@
 
 
 <p align="center">
-    <a href="https://arxiv.org/abs/2505.04718"><img src="https://img.shields.io/static/v1?label=Paper&message=2505.04718&color=red&logo=arxiv"></a>
+    <a href="https://arxiv.org/abs/2505.04718"><img src="https://img.shields.io/static/v1?label=ArXiv&message=2505.04718&color=red&logo=arxiv"></a>
     <a href="https://mlpc-ucsd.github.io/Lay-Your-Scene/" target="_blank">
         <img alt="Website" src="https://img.shields.io/badge/🌎_Website-Lay--Your--Scene-blue.svg" height="20" /></a>
 </p>
@@ -135,13 +135,12 @@ We would also like to thank <a href="https://xzhang.dev">Xiang Zhang</a>, <a hre
 
 If you find our work useful, please consider citing:
 ```bibtex
-@misc{srivastava2025layyourscenenaturalscenelayout,
-      title={Lay-Your-Scene: Natural Scene Layout Generation with Diffusion Transformers}, 
-      author={Divyansh Srivastava and Xiang Zhang and He Wen and Chenru Wen and Zhuowen Tu},
-      year={2025},
-      eprint={2505.04718},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2505.04718}, 
+@InProceedings{Srivastava_2025_ICCV_Lay_Your_Scene,
+    author    = {Srivastava, Divyansh and Zhang, Xiang and Wen, He and Wen, Chenru and Tu, Zhuowen},
+    title     = {Lay-Your-Scene: Natural Scene Layout Generation with Diffusion Transformers},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2025},
+    pages     = {17909-17919}
 }
 ```
