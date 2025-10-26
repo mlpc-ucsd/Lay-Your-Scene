@@ -1,3 +1,4 @@
+import os
 import json
 import sqlite3
 from typing import Any, Dict, List
@@ -11,6 +12,10 @@ class KeyObjectCache:
 
     def __init__(self, db_path: str = "cache/key_object.db") -> None:
         self.db_path: str = db_path
+
+        # ensure parent directory exists so the SQLite file can be created
+        db_dir = os.path.dirname(self.db_path)
+        os.makedirs(db_dir, exist_ok=True)
 
         # connect to db
         self.conn: sqlite3.Connection = sqlite3.connect(self.db_path)
