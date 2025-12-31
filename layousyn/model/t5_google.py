@@ -1,6 +1,5 @@
 # ----------------------------------------------------------------------------
 # Code based on pixart-alpha: https://github.com/PixArt-alpha/PixArt-alpha/blob/master/diffusion/model/diffusion_utils.py
-# Modified By: dsrivastavv (github)
 # ----------------------------------------------------------------------------
 
 import html

@@ -2,7 +2,7 @@
 
 
 <p align="center">
-    <a href="https://arxiv.org/abs/2505.04718"><img src="https://img.shields.io/static/v1?label=ArXiv&message=2505.04718&color=red&logo=arxiv"></a>
+    <a href="https://arxiv.org/abs/2505.04718"><img src="https://img.shields.io/static/v1?label=Paper&message=2505.04718&color=red&logo=arxiv"></a>
     <a href="https://mlpc-ucsd.github.io/Lay-Your-Scene/" target="_blank">
         <img alt="Website" src="https://img.shields.io/badge/🌎_Website-Lay--Your--Scene-blue.svg" height="20" /></a>
 </p>
@@ -32,6 +32,7 @@
 
 ## 🔥 Updates
 
+- **2025-12-30**: Added training instructions and code
 - **2025-09-30**: Inference and evaluation code is released
 - **2025-06-25**: Paper accepted at ICCV 2025 🎉🎉
 
@@ -122,6 +123,33 @@ python -m layousyn.evaluation.nsr_spatial_evaluation \
 3. **GLIP**: Please follow the instructions in [LAYOUTGPT](https://github.com/weixi-feng/LayoutGPT) for generating images from layouts using GLIGEN and detecting objects using GLIP.
 
 
+## Training
+1. Download `COCO-17`, [COCO-Caption-Grounded](https://huggingface.co/datasets/dsrivastavv/COCOCaptionGrounded), and [NSR-1K](https://github.com/weixi-feng/LayoutGPT) datasets and place them in `datasets` directory. The directory structure should look like:
+
+```
+datasets
+├── coco-2017
+├── COCOCaptionGrounded
+└── NSR-1K
+```
+
+2. Run the following command to train the model on a machine with 1 GPUs. 
+**Note**: First run needs to be done on a single GPU to save embedding caches. Later runs can be done on multiple GPUs.
+
+```bash
+export OMP_NUM_THREADS=4
+torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/config.json
+```
+
+Note: Training takes around 20 hours on 2 NVIDIA RTX A5000 GPUs after embedding caches are saved, running at approximately 15 Steps/Sec. Extracting embeddings takes around 2 hours on COCOGroundedDataset.
+
+3. (optional) Set `--embed-dir` to a very fast storage device like NVMe SSD to speed up training.
+
+```bash
+export OMP_NUM_THREADS=4
+torchrun --nnodes=1 --nproc_per_node=1 train.py --num-workers 4 --model DiT-XS --embed-dir /path/to/fast-storage
+```
+
 ## 🤝 Acknowledgements
 
 We deeply appreciate the contributions of the following projects:
@@ -135,12 +163,13 @@ We would also like to thank <a href="https://xzhang.dev">Xiang Zhang</a>, <a hre
 
 If you find our work useful, please consider citing:
 ```bibtex
-@InProceedings{Srivastava_2025_ICCV_Lay_Your_Scene,
-    author    = {Srivastava, Divyansh and Zhang, Xiang and Wen, He and Wen, Chenru and Tu, Zhuowen},
-    title     = {Lay-Your-Scene: Natural Scene Layout Generation with Diffusion Transformers},
-    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-    month     = {October},
-    year      = {2025},
-    pages     = {17909-17919}
+@misc{srivastava2025layyourscenenaturalscenelayout,
+      title={Lay-Your-Scene: Natural Scene Layout Generation with Diffusion Transformers}, 
+      author={Divyansh Srivastava and Xiang Zhang and He Wen and Chenru Wen and Zhuowen Tu},
+      year={2025},
+      eprint={2505.04718},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2505.04718}, 
 }
 ```

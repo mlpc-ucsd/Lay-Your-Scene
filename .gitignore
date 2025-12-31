@@ -27,3 +27,5 @@ scene*.png
 synthetic_images/
 CFG_2.0
 cache
+datasets
+results

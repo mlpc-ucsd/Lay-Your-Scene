@@ -19,3 +19,7 @@ dependencies:
     - accelerate
     - openai
     - requests
+    - pyarrow
+    - comet_ml
+    - tensorboard
+    - pandas
