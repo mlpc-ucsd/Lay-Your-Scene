@@ -13,7 +13,10 @@ class KeyObjectCache:
         self.db_path: str = db_path
 
         # connect to db
-        self.conn: sqlite3.Connection = sqlite3.connect(self.db_path)
+        try:
+            self.conn: sqlite3.Connection = sqlite3.connect(self.db_path)
+        except sqlite3.Error as e:
+            self.conn = sqlite3.connect(":memory:")
         self.cursor: sqlite3.Cursor = self.conn.cursor()
 
         # create db if not exists
