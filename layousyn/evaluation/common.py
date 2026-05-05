@@ -10,6 +10,7 @@ from layousyn.utils import find_model
 from layousyn.model.dit import LDiT_models
 from layousyn.prompt_handler.gpt_object_count_handler import GPTObjectCountPromptHandler
 from layousyn.prompt_handler.llama_object_count_handler import LlamaObjectCountPromptHandler
+from layousyn.prompt_handler.qwen_object_count_handler import QwenObjectCountPromptHandler
 
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
@@ -415,7 +416,7 @@ def load_model_unconditional(
 
 def extract_concepts_from_prompts(
     prompts: List[str],
-    model_id="meta-llama/Meta-Llama-3.1-8B-Instruct",
+    model_id="Qwen/Qwen3-8B",
     batch_size=4,
     device="cuda",
 ):
@@ -433,6 +434,13 @@ def extract_concepts_from_prompts(
         prompt_handler = GPTObjectCountPromptHandler(
             model_id=model_id,
             batch_size=batch_size,
+        )
+    elif "qwen" in model_id.lower():
+        print(f"Using Qwen object count prompt handler with model_id: {model_id}")
+        prompt_handler = QwenObjectCountPromptHandler(
+            model_id=model_id,
+            batch_size=batch_size,
+            device=device,
         )
     else:
         raise NotImplementedError("Model not supported")
